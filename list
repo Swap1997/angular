@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- bootst library -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<body align="center">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="+">
+                <span class="glyphion glyphicon-apple" style="color: #5bdb48">
+                </span>
+                Grocery List Swapnil
+            </a>
+        </div>
+    </div>
+</nav>
+<script>
+var app = angular.module("myShoppingList", []); 
+app.controller("myCtrl", function($scope) {
+
+    $scope.products = ["Naveen", "Swapnil", "Mahavir","Rahul"];
+
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {
+          return;
+        }
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your name list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";    
+        $scope.products.splice(x, 1);
+    }
+});
+</script>
+
+<div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl" class="w3-card-2 w3-margin" style="max-width:400px;">
+    <h3>Friends</h3>
+   
+  <ul class="w3-ul">
+    <li ng-repeat="x in products" class="w3-padding-16">{{x}}
+      <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-remove" ng-click="removeItem($index)"></span> 
+        </button>
+
+    
+  </ul>
+  <div class="w3-container w3-light-grey w3-padding-16">
+    <div class="w3-row w3-margin-top">
+       <div class="input-group">
+        <input placeholder="Add shopping items here" ng-model="addMe" class="w3-input w3-border w3-padding">
+		 <input placeholder="change menu bar name" ng-model="addMe" class="w3-input w3-border w3-padding">
+      </br>
+    </br>
+    
+        
+        <button ng-click="addItem()" type="button" class="btn btn-primary btn-lg btn-block">Add</button>
+   </div>
+    </div>
+    <p class="w3-text-red">{{errortext}}</p>
+  </div>
+ 
+</div>
+
+</body>
+</html>
